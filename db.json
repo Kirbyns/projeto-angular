@@ -1,0 +1,22 @@
+{
+    "tarefa":
+    [
+        {
+          "id": 1,
+          "title": "exemplo01",
+          "etapa": "To DO",
+          "Categoria": "Faculdade"
+          
+        } , 
+        
+
+        {
+            "id": 2,
+            "title": "exemplo02",
+            "etapa": "Doing",
+            "Categoria": "Trabalho"
+        }
+    ]
+
+    
+}
