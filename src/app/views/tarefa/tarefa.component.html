@@ -1,0 +1,104 @@
+<h2>Manutenção de Tarefas</h2>
+
+
+
+<table mat-table [dataSource]="tarefas" style="width: 100%">
+
+  <!-- Coluna Titulo da Tarefa -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Nome da tarefa</th>
+    <td mat-cell *matCellDef="let tarefas">{{tarefas.title}}</td>
+  </ng-container>
+
+  <!-- Coluna Etapa da Tarefa -->
+  <ng-container matColumnDef="etapa">
+    <th mat-header-cell *matHeaderCellDef>Etapa</th>
+    <td mat-cell *matCellDef="let tarefas" >{{tarefas.etapa}} 
+        
+        <div *ngIf="tarefas.etapa =='DOING'">
+            <mat-icon>pending</mat-icon>
+          </div>
+          <div *ngIf="tarefas.etapa =='TO DO'">
+            <mat-icon color="warn">dangerous</mat-icon>
+          </div>
+          <div *ngIf="tarefas.etapa =='DONE'">
+            <mat-icon color="accent">task_alt</mat-icon>
+          </div>
+        
+    </td>
+    
+    
+  </ng-container>
+  <!-- Coluna categoria da Tarefa -->
+  <ng-container matColumnDef="categoria">
+    <th mat-header-cell *matHeaderCellDef>Categoria</th>
+    <td mat-cell *matCellDef="let tarefas">{{tarefas.categoria}}</td>
+  </ng-container>
+
+
+  <!-- Coluna Ações -->
+  <ng-container matColumnDef="acoes">
+    <th mat-header-cell *matHeaderCellDef>Ações</th>
+    <td mat-cell *matCellDef="let tarefa">
+
+      <button mat-button (click)="editar(tarefa)">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-button (click)="excluir(tarefa.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button *ngIf="tarefa.etapa =='DOING'" mat-button (click)="tarefa.etapa = 'DONE'">
+        <mat-icon *ngIf=" tarefa.etapa == 'DONE'">check_box</mat-icon>
+        <mat-icon *ngIf=" tarefa.etapa == 'DOING'">check_box_outline_blank</mat-icon>
+      </button>
+      <button *ngIf="tarefa.etapa =='DONE'" mat-button (click)="tarefa.etapa = 'DOING'">
+        <mat-icon *ngIf=" tarefa.etapa == 'DONE'">check_box</mat-icon>
+        <mat-icon *ngIf=" tarefa.etapa == 'DOING'">check_box_outline_blank</mat-icon>
+      </button>
+      <button *ngIf="tarefa.etapa =='TO DO'" mat-button (click)="tarefa.etapa = 'DOING'">
+        <mat-icon *ngIf=" tarefa.etapa == 'TO DO'">indeterminate_check_box</mat-icon>
+        <mat-icon *ngIf=" tarefa.etapa == 'DOING'">check_box_outline_blank</mat-icon>
+        <mat-icon *ngIf=" tarefa.etapa == 'DONE'">check_box</mat-icon>
+      </button>
+
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+  <tr mat-row *matRowDef="let row; columns: colunas"></tr>
+</table>
+
+<button mat-fab (click)="novo()" color="primary" class="fab">
+  <mat-icon>
+    add
+  </mat-icon>
+</button>
+
+<div *ngIf="tarefa">
+
+  <mat-form-field class="form-field">
+    <mat-label>Titulo da Tarefa</mat-label>
+    <input matInput [(ngModel)]="tarefa.title" required>
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field class="form-field">
+    <mat-label>Etapa</mat-label>
+    <mat-select matNativeControl matInput [(ngModel)]="tarefa.etapa" required>
+        <mat-option value="DOING">DOING</mat-option>
+        <mat-option value="DONE">DONE</mat-option>
+        <mat-option value="TO DO">TO DO</mat-option>
+      </mat-select>
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field class="form-field">
+    <mat-label>Categoria</mat-label>
+    <input matInput [(ngModel)]="tarefa.categoria">
+  </mat-form-field>
+
+  <button color="primary" mat-raised-button (click)="salvar()">Salvar</button>
+</div>
