@@ -48,23 +48,26 @@
       <button mat-button (click)="excluir(tarefa.id)">
         <mat-icon>delete</mat-icon>
       </button>
+    
       <button *ngIf="tarefa.etapa =='DOING'" mat-button (click)="tarefa.etapa = 'DONE'">
         <mat-icon *ngIf=" tarefa.etapa == 'DONE'">check_box</mat-icon>
         <mat-icon *ngIf=" tarefa.etapa == 'DOING'">check_box_outline_blank</mat-icon>
+         
       </button>
       <button *ngIf="tarefa.etapa =='DONE'" mat-button (click)="tarefa.etapa = 'DOING'">
         <mat-icon *ngIf=" tarefa.etapa == 'DONE'">check_box</mat-icon>
         <mat-icon *ngIf=" tarefa.etapa == 'DOING'">check_box_outline_blank</mat-icon>
       </button>
-      <button *ngIf="tarefa.etapa =='TO DO'" mat-button (click)="tarefa.etapa = 'DOING'">
+      <button *ngIf="tarefa.etapa =='TO DO'"  mat-button (click)="tarefa.etapa = 'DOING'">
         <mat-icon *ngIf=" tarefa.etapa == 'TO DO'">indeterminate_check_box</mat-icon>
         <mat-icon *ngIf=" tarefa.etapa == 'DOING'">check_box_outline_blank</mat-icon>
         <mat-icon *ngIf=" tarefa.etapa == 'DONE'">check_box</mat-icon>
+        
       </button>
-
+      
     </td>
-  </ng-container>
 
+  </ng-container>
   <tr mat-header-row *matHeaderRowDef="colunas"></tr>
   <tr mat-row *matRowDef="let row; columns: colunas"></tr>
 </table>

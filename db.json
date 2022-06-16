@@ -3,7 +3,25 @@
     {
       "id": 1,
       "title": "terste",
+      "etapa": "DOING",
+      "categoria": "dasdas"
+    },
+    {
+      "id": 2,
+      "title": "sdas",
       "etapa": "DONE",
+      "categoria": "dsad"
+    },
+    {
+      "id": 3,
+      "title": "teste to do ",
+      "etapa": "DONE",
+      "categoria": "Escola "
+    },
+    {
+      "id": 4,
+      "title": "",
+      "etapa": "",
       "categoria": ""
     }
   ]
