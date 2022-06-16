@@ -48,23 +48,6 @@
       <button mat-button (click)="excluir(tarefa.id)">
         <mat-icon>delete</mat-icon>
       </button>
-    
-      <button *ngIf="tarefa.etapa =='DOING'" mat-button (click)="tarefa.etapa = 'DONE'">
-        <mat-icon *ngIf=" tarefa.etapa == 'DONE'">check_box</mat-icon>
-        <mat-icon *ngIf=" tarefa.etapa == 'DOING'">check_box_outline_blank</mat-icon>
-         
-      </button>
-      <button *ngIf="tarefa.etapa =='DONE'" mat-button (click)="tarefa.etapa = 'DOING'">
-        <mat-icon *ngIf=" tarefa.etapa == 'DONE'">check_box</mat-icon>
-        <mat-icon *ngIf=" tarefa.etapa == 'DOING'">check_box_outline_blank</mat-icon>
-      </button>
-      <button *ngIf="tarefa.etapa =='TO DO'"  mat-button (click)="tarefa.etapa = 'DOING'">
-        <mat-icon *ngIf=" tarefa.etapa == 'TO DO'">indeterminate_check_box</mat-icon>
-        <mat-icon *ngIf=" tarefa.etapa == 'DOING'">check_box_outline_blank</mat-icon>
-        <mat-icon *ngIf=" tarefa.etapa == 'DONE'">check_box</mat-icon>
-        
-      </button>
-      
     </td>
 
   </ng-container>
@@ -78,30 +61,34 @@
   </mat-icon>
 </button>
 
-<div *ngIf="tarefa">
+<form  [formGroup]="tarefaForm" #formDir="ngForm" *ngIf="tarefa"> <!--criação do form group para fazer validação-->
 
   <mat-form-field class="form-field">
     <mat-label>Titulo da Tarefa</mat-label>
-    <input matInput [(ngModel)]="tarefa.title" required>
+    <input matInput [(ngModel)]="tarefa.title"  formControlName="title">
   </mat-form-field>
-
-  <br>
-
+  <div *ngIf="tittle.invalid && formDir.submitted "  >
+    <span class="badge badge-warning"> Titulo da Tarefa é um campo Obrigatório</span>
+  </div>
   <mat-form-field class="form-field">
     <mat-label>Etapa</mat-label>
-    <mat-select matNativeControl matInput [(ngModel)]="tarefa.etapa" required>
+    <mat-select matNativeControl matInput [(ngModel)]="tarefa.etapa" formControlName="etapa" required>
         <mat-option value="DOING">DOING</mat-option>
         <mat-option value="DONE">DONE</mat-option>
         <mat-option value="TO DO">TO DO</mat-option>
       </mat-select>
   </mat-form-field>
-
-  <br>
+  <div *ngIf="etapa.invalid && formDir.submitted "  >
+    <span class="badge badge-warning"> Etapa da Tarefa é um campo Obrigatório</span>
+  </div>
 
   <mat-form-field class="form-field">
     <mat-label>Categoria</mat-label>
-    <input matInput [(ngModel)]="tarefa.categoria">
+    <input matInput [(ngModel)]="tarefa.categoria" formControlName="categoria">
   </mat-form-field>
+  <div *ngIf="categoria.invalid && formDir.submitted "  >
+    <span class="badge badge-warning mb-3"> Categoria da Tarefa é um campo Obrigatório</span>
+  </div>
 
   <button color="primary" mat-raised-button (click)="salvar()">Salvar</button>
-</div>
+</form>

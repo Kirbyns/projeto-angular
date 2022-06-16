@@ -32,4 +32,8 @@ export class TarefaService {
   {
     return this.http.put<Tarefa>(`${environment.apiLink}tarefa/${tarefa.id}`, tarefa);
   }
+  atualizarEtapa(tarefa: Tarefa): Observable<Tarefa>
+  {
+    return this.http.put<Tarefa>(`${environment.apiLink}tarefa/${tarefa.id}`, tarefa.etapa);
+  }
 }

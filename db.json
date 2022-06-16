@@ -2,27 +2,33 @@
   "tarefa": [
     {
       "id": 1,
-      "title": "terste",
-      "etapa": "DOING",
-      "categoria": "dasdas"
+      "title": "Nova tarefa",
+      "etapa": "DONE",
+      "categoria": "Estudos"
     },
     {
       "id": 2,
-      "title": "sdas",
+      "title": "weqwe",
       "etapa": "DONE",
-      "categoria": "dsad"
+      "categoria": "eqwe"
     },
     {
       "id": 3,
-      "title": "teste to do ",
+      "title": "adasd",
       "etapa": "DONE",
-      "categoria": "Escola "
+      "categoria": "dasd"
     },
     {
       "id": 4,
-      "title": "",
-      "etapa": "",
-      "categoria": ""
+      "title": "sdasd",
+      "etapa": "TO DO",
+      "categoria": "asdasd"
+    },
+    {
+      "id": 5,
+      "title": "das",
+      "etapa": "DONE",
+      "categoria": "sadas"
     }
   ]
 }

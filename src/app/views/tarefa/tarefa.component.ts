@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TarefaService } from 'src/app/service/tarefa.service';
 import { Tarefa } from 'src/app/tarefa';
 
@@ -12,13 +14,34 @@ export class TarefaComponent implements OnInit {
   tarefa? :Tarefa;
   editando = false;
   colunas = ['title', 'etapa', 'categoria', 'acoes'];
-  constructor(private tarefaService : TarefaService ) { }
-
-  ngOnInit(): void {
+  tarefaForm!: FormGroup;
+  constructor(private tarefaService : TarefaService, private _snackBar: MatSnackBar ) { }
+ 
+  ngOnInit(): void {  //usamos o ngOnInit pois o formulario precisa ser iniciado ( ngOnInit : inicializando coisas do angular em especifico)
+    this.tarefaForm = new FormGroup({   //prenchendo com todos campos do formulario
+      title: new FormControl('', [Validators.required]),
+      etapa: new FormControl('',[Validators.required]),
+      categoria: new FormControl('',[Validators.required]),
+    });
     this.listar();
   }
 
+  get tittle(){
+    return this.tarefaForm.get('title')!;  //pegar o atributo title do tarefaForm(formulario da home)
+  }
+  get etapa(){
+    return this.tarefaForm.get('etapa')!;  //pegar o atributo etapa do tarefaForm(formulario da home)
+  }
+  get categoria(){
+    return this.tarefaForm.get('categoria')!;  //pegar o atributo categoria do tarefaForm(formulario da home)
+  }
 
+  openSnackBar() {
+    this._snackBar.open("salvo com sucesso","fechar"); //envio de salvo com sucesso.
+  }
+  openSnackBarnegativo() {
+    this._snackBar.open("falta dados no seu formulario","fechar"); //envio de salvo com sucesso.
+  }
   listar(){
     this.tarefaService.listarTarefa().subscribe(tarefas =>{
       this.tarefas = tarefas;
@@ -32,19 +55,35 @@ export class TarefaComponent implements OnInit {
 
   salvar(){
     if (this.tarefa) {
-
+      
+  
       if (!this.editando) {
-        this.tarefaService.inserirTarefa(this.tarefa).subscribe(tarefa => {
-          this.listar();
-          this.tarefa = undefined;
-        });
+        if(this.tarefaForm.invalid){
+          return this.openSnackBarnegativo();
+        }
+          else{
+          this.tarefaService.inserirTarefa(this.tarefa).subscribe(tarefa => {
+            this.listar();
+            this.tarefa = undefined;
+            this.openSnackBar();
+  
+          
+            });
+          }
       }
       else {
-        this.tarefaService.atualizarTarefa(this.tarefa).subscribe(tarefa => {
-          this.listar();
-          this.tarefa = undefined;
-        });
+        if(this.tarefaForm.invalid){
+          return this.openSnackBarnegativo();
+        }
+        else{
+          this.tarefaService.atualizarTarefa(this.tarefa).subscribe(tarefa => {
+            this.listar();
+            this.tarefa = undefined;
+          });
+
+        }
       }
+    
 
     }
   }
@@ -60,4 +99,6 @@ export class TarefaComponent implements OnInit {
     this.editando = true;
   }
 
+   
 }
+
