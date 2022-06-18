@@ -1,15 +1,9 @@
 {
   "tarefa": [
     {
-      "id": 1,
-      "title": "Nova tarefa",
-      "etapa": "DONE",
-      "categoria": "Estudos"
-    },
-    {
       "id": 2,
       "title": "weqwe",
-      "etapa": "DONE",
+      "etapa": "DOING",
       "categoria": "eqwe"
     },
     {
@@ -29,6 +23,12 @@
       "title": "das",
       "etapa": "DONE",
       "categoria": "sadas"
+    },
+    {
+      "id": 6,
+      "title": "estudar",
+      "etapa": "DOING",
+      "categoria": "Estudos"
     }
   ]
 }

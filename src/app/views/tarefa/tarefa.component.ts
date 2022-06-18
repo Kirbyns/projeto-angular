@@ -40,7 +40,7 @@ export class TarefaComponent implements OnInit {
     this._snackBar.open("salvo com sucesso","fechar"); //envio de salvo com sucesso.
   }
   openSnackBarnegativo() {
-    this._snackBar.open("falta dados no seu formulario","fechar"); //envio de salvo com sucesso.
+    this._snackBar.open("falta dados no seu formulario","fechar"); //envio de erro.
   }
   listar(){
     this.tarefaService.listarTarefa().subscribe(tarefas =>{
